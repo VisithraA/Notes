@@ -17,7 +17,7 @@ public class NoteRepository {
 	EntityManager entityManager;
 	EntityTransaction entityTransaction;
 
-	private NoteRepository() {
+	public NoteRepository() {
 		entityManagerFactory = Persistence.createEntityManagerFactory("dev");
 		entityManager = entityManagerFactory.createEntityManager();
 		entityTransaction = entityManager.getTransaction();
@@ -31,26 +31,11 @@ public class NoteRepository {
 	}
 
 	public List<Note> getNotes() {
-		Query query = entityManager.createQuery("Select note.* from Note note");
+		Query query = entityManager.createQuery("Select note from Note note");
 		List<Note> notes = query.getResultList();
 		return notes;
 	}
 
-	public void addNote(String title,String content) {
-		Note note =new Note(title, content);
-		entityTransaction.begin();
-		entityManager.persist(note);
-		entityTransaction.commit();
-	}
-
-	public void updateNote(Note note) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void deleteNote(int id) {
-		// TODO Auto-generated method stub
-
-	}
+	
 
 }
