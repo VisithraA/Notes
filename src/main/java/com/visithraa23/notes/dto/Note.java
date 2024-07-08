@@ -9,16 +9,23 @@ import javax.persistence.Id;
 public class Note {
 
 	@Id
-	@GeneratedValue(strategy =GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String title;
 	private String content;
 	private String lastEdit;
+	private int wordCount;
+	
+	
 
-	public Note(String title,String content)
-	{
+	public Note() {
+	}
+
+	public Note(String title, String content, int wordCount, String lastEdit) {
 		this.title = title;
 		this.content = content;
+		this.lastEdit = lastEdit;
+		this.wordCount = wordCount;
 	}
 
 	public int getId() {
@@ -52,4 +59,20 @@ public class Note {
 	public void setLastEdit(String lastEdit) {
 		this.lastEdit = lastEdit;
 	}
+
+	public int getWordCount() {
+		return wordCount;
+	}
+
+	public void setWordCount(int wordCount) {
+		this.wordCount = wordCount;
+	}
+
+	@Override
+	public String toString() {
+		return "Note [id=" + id + ", title=" + title + ", content=" + content + ", lastEdit=" + lastEdit
+				+ ", wordCount=" + wordCount + "]";
+	}
+	
+	
 }

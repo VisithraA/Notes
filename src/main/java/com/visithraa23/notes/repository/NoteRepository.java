@@ -1,5 +1,7 @@
 package com.visithraa23.notes.repository;
 
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -30,12 +32,27 @@ public class NoteRepository {
 		return repository;
 	}
 
+	public String getCurrentDateTime() {
+		Date date = new Date();
+		return date.toLocaleString();
+
+	}
+
 	public List<Note> getNotes() {
 		Query query = entityManager.createQuery("Select note from Note note");
 		List<Note> notes = query.getResultList();
 		return notes;
 	}
 
-	
+	public boolean save(Note note) {
+		try {
+			entityTransaction.begin();
+			entityManager.persist(note);
+			entityTransaction.commit();
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
 
 }
